@@ -1,0 +1,263 @@
+/* Vault RAG — sidebar chat. Only Obsidian theme variables, so it follows any theme. */
+
+.vault-rag {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+/* Header */
+.vault-rag .vr-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--size-4-2) var(--size-4-3);
+  border-bottom: 1px solid var(--background-modifier-border);
+  flex-shrink: 0;
+}
+.vault-rag .vr-title {
+  display: flex;
+  align-items: center;
+  gap: var(--size-4-2);
+  font-weight: var(--font-semibold);
+  font-size: var(--font-ui-medium);
+}
+.vault-rag .vr-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  flex-shrink: 0;
+}
+.vault-rag .vr-dot.is-ok { background: var(--color-green); }
+.vault-rag .vr-dot.is-down { background: var(--color-red); }
+.vault-rag .vr-header-actions { display: flex; gap: 2px; }
+
+/* Thread */
+.vault-rag .vr-thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--size-4-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4-6);
+}
+
+/* Empty state */
+.vault-rag .vr-empty {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4-2);
+}
+.vault-rag .vr-empty-title {
+  font-size: var(--font-ui-large);
+  font-weight: var(--font-semibold);
+  color: var(--text-normal);
+}
+.vault-rag .vr-empty-sub {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  line-height: 1.5;
+  margin-bottom: var(--size-4-2);
+}
+.vault-rag .vr-suggestions { display: flex; flex-direction: column; gap: var(--size-4-1); }
+.vault-rag button.vr-suggestion {
+  justify-content: flex-start;
+  text-align: left;
+  height: auto;
+  padding: var(--size-4-2) var(--size-4-3);
+  background: transparent;
+  border: 1px solid var(--background-modifier-border);
+  box-shadow: none;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  white-space: normal;
+}
+.vault-rag button.vr-suggestion:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+
+/* A question and its answer */
+.vault-rag .vr-turn { display: flex; flex-direction: column; gap: var(--size-4-2); }
+.vault-rag .vr-question {
+  align-self: flex-end;
+  max-width: 88%;
+  padding: var(--size-4-2) var(--size-4-3);
+  border-radius: var(--radius-l);
+  background: var(--background-secondary-alt, var(--background-secondary));
+  color: var(--text-normal);
+  white-space: pre-wrap;
+  user-select: text;
+}
+.vault-rag .vr-answer-wrap { display: flex; flex-direction: column; gap: var(--size-4-2); }
+.vault-rag .vr-answer { user-select: text; line-height: 1.55; }
+.vault-rag .vr-answer > :first-child { margin-top: 0; }
+.vault-rag .vr-answer > :last-child { margin-bottom: 0; }
+.vault-rag .vr-answer p { margin: 0 0 var(--size-4-2); }
+
+/* Citation pills */
+.vault-rag a.vr-cite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35em;
+  height: 1.35em;
+  padding: 0 0.3em;
+  margin: 0 1px;
+  border-radius: var(--radius-s);
+  background: var(--background-modifier-hover);
+  color: var(--text-accent);
+  font-size: 0.72em;
+  font-weight: var(--font-semibold);
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: 0.15em;
+}
+.vault-rag a.vr-cite:hover { background: var(--interactive-accent); color: var(--text-on-accent); }
+
+/* Status line while working */
+.vault-rag .vr-status {
+  display: flex;
+  align-items: center;
+  gap: var(--size-4-2);
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  font-variant-numeric: tabular-nums;
+}
+.vault-rag .vr-status.is-error { color: var(--text-error); }
+.vault-rag .vr-status.is-muted { color: var(--text-faint); }
+.vault-rag .vr-spinner { display: flex; }
+.vault-rag .vr-spinner svg { width: 14px; height: 14px; animation: vr-spin 0.9s linear infinite; }
+@keyframes vr-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .vault-rag .vr-spinner svg { animation: none; } }
+
+/* Sources */
+.vault-rag .vr-sources details { font-size: var(--font-ui-small); }
+.vault-rag .vr-sources summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-4-2);
+  cursor: pointer;
+  color: var(--text-muted);
+  list-style: none;
+  padding: 2px 0;
+}
+.vault-rag .vr-sources summary::-webkit-details-marker { display: none; }
+.vault-rag .vr-sources summary::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 4px solid currentColor;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transition: transform 120ms ease;
+}
+.vault-rag .vr-sources details[open] summary::before { transform: rotate(90deg); }
+.vault-rag .vr-sources summary:hover { color: var(--text-normal); }
+.vault-rag .vr-count { color: var(--text-faint); }
+.vault-rag .vr-source-list { display: flex; flex-direction: column; margin-top: var(--size-4-1); }
+.vault-rag a.vr-source {
+  display: flex;
+  gap: var(--size-4-2);
+  align-items: baseline;
+  padding: var(--size-4-1) var(--size-4-2);
+  border-radius: var(--radius-s);
+  text-decoration: none;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+.vault-rag a.vr-source.is-cited { opacity: 1; color: var(--text-normal); }
+.vault-rag a.vr-source:hover { background: var(--background-modifier-hover); opacity: 1; }
+.vault-rag .vr-source-n {
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.2em;
+  text-align: right;
+}
+.vault-rag a.vr-source.is-cited .vr-source-n { color: var(--text-accent); font-weight: var(--font-semibold); }
+.vault-rag .vr-source-body { min-width: 0; }
+.vault-rag .vr-source-name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.vault-rag .vr-pin { display: inline-flex; color: var(--text-accent); }
+.vault-rag .vr-pin svg { width: 12px; height: 12px; }
+.vault-rag .vr-source-meta {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Footer under a finished answer */
+.vault-rag .vr-footer:empty { display: none; }
+.vault-rag .vr-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+}
+.vault-rag .vr-metrics {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  font-variant-numeric: tabular-nums;
+}
+.vault-rag .vr-actions { display: flex; gap: 2px; flex-shrink: 0; }
+.vault-rag .vr-icon-btn svg { width: 15px; height: 15px; }
+
+/* Composer */
+.vault-rag .vr-composer {
+  flex-shrink: 0;
+  padding: var(--size-4-2) var(--size-4-3) var(--size-4-3);
+  border-top: 1px solid var(--background-modifier-border);
+}
+.vault-rag .vr-input {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--size-4-2);
+  padding: var(--size-4-1) var(--size-4-1) var(--size-4-1) var(--size-4-3);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-l);
+  background: var(--background-primary);
+}
+.vault-rag .vr-input:focus-within { border-color: var(--interactive-accent); }
+.vault-rag .vr-input textarea {
+  flex: 1;
+  resize: none;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 6px 0;
+  min-height: 0;
+  max-height: 200px;
+  font-family: inherit;
+  font-size: var(--font-ui-medium);
+  line-height: 1.4;
+}
+.vault-rag .vr-input textarea:focus { box-shadow: none; }
+.vault-rag button.vr-send {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: var(--radius-m);
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  flex-shrink: 0;
+}
+.vault-rag button.vr-send:hover { background: var(--interactive-accent-hover); }
+.vault-rag button.vr-send.is-busy { background: var(--background-modifier-hover); color: var(--text-normal); }
+.vault-rag button.vr-send svg { width: 16px; height: 16px; }
+.vault-rag .vr-hint {
+  margin-top: var(--size-4-1);
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+}

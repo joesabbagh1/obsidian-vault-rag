@@ -1,0 +1,17 @@
+{
+  "name": "obsidian-vault-rag",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc --noEmit && node esbuild.config.mjs",
+    "install-plugin": "npm run build && test -n \"$VAULT\" || { echo \"Set VAULT to your vault path, e.g. VAULT=~/Notes npm run install-plugin\"; exit 1; } && mkdir -p \"$VAULT/.obsidian/plugins/vault-rag\" && cp main.js manifest.json styles.css \"$VAULT/.obsidian/plugins/vault-rag/\""
+  },
+  "devDependencies": {
+    "esbuild": "0.24.2",
+    "obsidian": "1.7.2",
+    "typescript": "5.6.3",
+    "@types/node": "22.10.2"
+  },
+  "description": "Ask questions about your Obsidian vault. Local RAG with Ollama and Weaviate.",
+  "license": "MIT"
+}

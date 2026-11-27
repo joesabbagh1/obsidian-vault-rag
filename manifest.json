@@ -1,0 +1,9 @@
+{
+  "id": "vault-rag",
+  "name": "Vault RAG",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Ask questions about your vault. Ollama embeds and answers, Weaviate searches.",
+  "author": "Joe-Michel Sabbagh",
+  "isDesktopOnly": true
+}
